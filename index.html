@@ -13,18 +13,18 @@
         <script type="text/paperscript" canvas="canvas"></script>
         <script type="text/javascript" src="lib/paper-full.js"></script>
         <script type="text/paperscript" canvas="canvas">
-            // Create a Paper.js Path to draw a line into it:
-
-            for (var x = 0; x < 1000; x += 50) {
-                for (var y = 0; y < 1000; y+= 50){
-                    new Path.Circle(new Point(x, y), 10).fillColor = 'red';
-                }
+        paper.view.onResize = function() {
+            console.log("view width is now" + paper.view.bounds.width);
+        }
+            function randomWidth() {
+                return Math.random() * (paper.view.bounds.width - 0) + 0;
             }
-            function getRandom() {
-                return Math.random() * (1000 - 0) + 0;
+            function randomHeight() {
+                return Math.random() * (paper.view.bounds.height - 0) + 0;
             }
+            //key down create new random circle
             function onKeyDown(event){
-                new Path.Circle(new Point(getRandom(), getRandom()), 50).fillColor = 'yellow';
+                new Path.Circle(new Point(randomWidth(), randomHeight()), 50).fillColor = 'yellow';
             }
         </script>
     </head>
