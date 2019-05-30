@@ -16,16 +16,22 @@
         paper.view.onResize = function() {
             console.log("view width is now" + paper.view.bounds.width);
         }
-            function randomWidth() {
-                return Math.random() * (paper.view.bounds.width - 0) + 0;
-            }
-            function randomHeight() {
-                return Math.random() * (paper.view.bounds.height - 0) + 0;
-            }
-            //key down create new random circle
-            function onKeyDown(event){
-                new Path.Circle(new Point(randomWidth(), randomHeight()), 50).fillColor = 'yellow';
-            }
+
+        function randomWidth() {
+            return Math.random() * (paper.view.bounds.width - 0) + 0;
+        }
+        function randomHeight() {
+            return Math.random() * (paper.view.bounds.height - 0) + 0;
+        }
+        function randomColor() {
+            var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+            return colors[Math.floor(Math.random() * (colors.length - 1) + 0)]
+        }
+        //key down create new random circle
+        function onKeyDown(event){
+            var radius = Math.random() * 100 + 40;
+            new Path.Circle(new Point(randomWidth(), randomHeight()), radius).fillColor = randomColor();
+        }
         </script>
     </head>
     <body>
