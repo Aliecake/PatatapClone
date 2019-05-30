@@ -12,12 +12,27 @@
         <link rel="stylesheet" href="index.css">
         <script type="text/paperscript" canvas="canvas"></script>
         <script type="text/javascript" src="lib/paper-full.js"></script>
+        <script type="text/paperscript" canvas="canvas">
+            // Create a Paper.js Path to draw a line into it:
+
+            for (var x = 0; x < 1000; x += 50) {
+                for (var y = 0; y < 1000; y+= 50){
+                    new Path.Circle(new Point(x, y), 10).fillColor = 'red';
+                }
+            }
+            function getRandom() {
+                return Math.random() * (1000 - 0) + 0;
+            }
+            function onKeyDown(event){
+                new Path.Circle(new Point(getRandom(), getRandom()), 50).fillColor = 'yellow';
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <canvas id="canvas" style="background:black"></canvas>
+        <canvas id="canvas" resize="true"></canvas>
         <script src="js/index.js" async defer></script>
     </body>
 </html>
