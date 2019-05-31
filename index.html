@@ -13,16 +13,15 @@
         <script type="text/paperscript" canvas="canvas"></script>
         <script type="text/javascript" src="lib/paper-full.js"></script>
         <script type="text/paperscript" canvas="canvas">
-        paper.view.onResize = function() {
-            console.log("view width is now" + paper.view.bounds.width);
-        }
 
-        function randomWidth() {
-            return Math.random() * (paper.view.bounds.width - 0) + 0;
-        }
-        function randomHeight() {
-            return Math.random() * (paper.view.bounds.height - 0) + 0;
-        }
+        var text = new PointText({
+            point: view.center,
+            content: 'Click here and then press some keys.',
+            justification: 'center',
+            fontSize: 20,
+            fillColor: 'grey'
+        });
+
         function randomColor() {
             var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
             return colors[Math.floor(Math.random() * (colors.length) + 0)]
@@ -30,7 +29,12 @@
         //key down create new random circle
         function onKeyDown(event){
             var radius = Math.random() * 100 + 40;
-            new Path.Circle(new Point(randomWidth(), randomHeight()), radius).fillColor = randomColor();
+            var maxPoint = new Point(view.bounds.width, view.bounds.height);
+            var randomPoint = Point.random();
+            var point = maxPoint * randomPoint;
+
+            new Path.Circle(point).fillColor = randomColor();
+            new Path.Circle((point), radius).fillColor = randomColor();
         }
         </script>
     </head>
@@ -39,6 +43,5 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <canvas id="canvas" resize="true"></canvas>
-        <script src="js/index.js" async defer></script>
     </body>
 </html>
