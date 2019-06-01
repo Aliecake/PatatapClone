@@ -33,26 +33,27 @@
 
         //key down create new random circle
         function onKeyDown(event){
+            var radius = Math.random() * 300 + 40;
+            var maxPoint = new Point(view.bounds.width, view.bounds.height);
+            var randomPoint = Point.random();
+            var point = maxPoint * randomPoint;
+            var color;
 
             if (!keysData[event.key]) {
-                //refractor
-                var radius = Math.random() * 300 + 40;
-                var maxPoint = new Point(view.bounds.width, view.bounds.height);
-                var randomPoint = Point.random();
-                var point = maxPoint * randomPoint;
-                var newCircle = new Path.Circle((point), radius);
 
-                var color = newCircle.fillColor = randomColor();
+                var newCircle = new Path.Circle((point), radius);
+                color = newCircle.fillColor = randomColor();
 
                 keysData[event.key] = {
                     color: color,
                     sound: "playme.mp3"
                 }
-                console.log(keysData)
                 circles.push(newCircle)
 
             } else {
-                console.log(JSON.stringify(keysData[event.key].color));
+                var oldCircle = new Path.Circle((point), radius);
+                oldCircle.fillColor = keysData[event.key].color;
+                circles.push(oldCircle);
             }
         }
         function onFrame(event) {
@@ -66,7 +67,7 @@
                 circles.shift(circles[jj])
             }
         }
-        // deleteCircle();
+        deleteCircle();
         </script>
     </head>
     <body>
