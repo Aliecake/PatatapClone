@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="index.css">
         <script type="text/paperscript" canvas="canvas"></script>
         <script type="text/javascript" src="lib/paper-full.js"></script>
+        <script type="text/javascript" src="js/keydata.js"></script>
         <script type="text/paperscript" canvas="canvas">
 
         var text = new PointText({
@@ -24,18 +25,48 @@
 
         function randomColor() {
             var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-            return colors[Math.floor(Math.random() * (colors.length) + 0)]
+            var pickedColor = colors[Math.floor(Math.random() * (colors.length) + 0)];
+            return pickedColor;
         }
+
+        var circles = [];
+
         //key down create new random circle
         function onKeyDown(event){
-            var radius = Math.random() * 100 + 40;
-            var maxPoint = new Point(view.bounds.width, view.bounds.height);
-            var randomPoint = Point.random();
-            var point = maxPoint * randomPoint;
 
-            new Path.Circle(point).fillColor = randomColor();
-            new Path.Circle((point), radius).fillColor = randomColor();
+            if (!keysData[event.key]) {
+                //refractor
+                var radius = Math.random() * 300 + 40;
+                var maxPoint = new Point(view.bounds.width, view.bounds.height);
+                var randomPoint = Point.random();
+                var point = maxPoint * randomPoint;
+                var newCircle = new Path.Circle((point), radius);
+
+                var color = newCircle.fillColor = randomColor();
+
+                keysData[event.key] = {
+                    color: color,
+                    sound: "playme.mp3"
+                }
+                console.log(keysData)
+                circles.push(newCircle)
+
+            } else {
+                console.log(JSON.stringify(keysData[event.key].color));
+            }
         }
+        function onFrame(event) {
+            for (var ii = 0; ii < circles.length; ii++){
+                circles[ii].fillColor.hue += 1;
+                circles[ii].scale(.92)
+            }
+        }
+        function deleteCircle() {
+            for (var jj = 0; jj < circles.length; jj++){
+                circles.shift(circles[jj])
+            }
+        }
+        // deleteCircle();
         </script>
     </head>
     <body>
