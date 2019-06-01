@@ -38,10 +38,9 @@
             var randomPoint = Point.random();
             var point = maxPoint * randomPoint;
             var color;
-
+            var newCircle = new Path.Circle((point), radius);
+            //if data does not exist, create key data
             if (!keysData[event.key]) {
-
-                var newCircle = new Path.Circle((point), radius);
                 color = newCircle.fillColor = randomColor();
 
                 keysData[event.key] = {
@@ -51,11 +50,11 @@
                 circles.push(newCircle)
 
             } else {
-                var oldCircle = new Path.Circle((point), radius);
-                oldCircle.fillColor = keysData[event.key].color;
-                circles.push(oldCircle);
+                newCircle.fillColor = keysData[event.key].color;
+                circles.push(newCircle);
             }
         }
+        //hue change and reduction of size
         function onFrame(event) {
             for (var ii = 0; ii < circles.length; ii++){
                 circles[ii].fillColor.hue += 1;
