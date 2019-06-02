@@ -30,7 +30,6 @@
             return pickedColor;
         }
         var circles = [];
-
         //key down create new random circle
         function onKeyDown(event){
             var radius = Math.random() * 300 + 40;
@@ -40,14 +39,12 @@
             var color;
             var newCircle = new Path.Circle((point), radius);
             //if color data does not exist, create key data
-            if (!keysData[event.key]) {
+            if (!keysData[event.key].color) {
                 color = newCircle.fillColor = randomColor();
-
                 keysData[event.key] = {
                     color: color,
                 }
                 circles.push(newCircle)
-
             } else {
                 newCircle.fillColor = keysData[event.key].color;
                 circles.push(newCircle);
