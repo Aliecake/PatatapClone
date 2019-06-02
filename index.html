@@ -38,12 +38,13 @@
             var point = maxPoint * randomPoint;
             var color;
             var newCircle = new Path.Circle((point), radius);
+            var tapSound = keysData[event.key].sound;
+            tapSound.play();
+
             //if color data does not exist, create key data
             if (!keysData[event.key].color) {
                 color = newCircle.fillColor = randomColor();
-                keysData[event.key] = {
-                    color: color,
-                }
+                keysData[event.key].color = color;
                 circles.push(newCircle)
             } else {
                 newCircle.fillColor = keysData[event.key].color;
@@ -54,7 +55,7 @@
         function onFrame(event) {
             for (var ii = 0; ii < circles.length; ii++){
                 circles[ii].fillColor.hue += 1;
-                circles[ii].scale(.92)
+                circles[ii].scale(.92);
             }
         }
         //delete circles from array so it doesnt get too large.
