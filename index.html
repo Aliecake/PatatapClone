@@ -58,10 +58,11 @@
                 circles[ii].scale(.92);
             }
         }
-        //delete circles from array so it doesnt get too large.
+        //delete circles from array & canvas
         function deleteCircle() {
             for (var jj = 0; jj < circles.length; jj++){
                 circles.shift(circles[jj])
+                circle[jj].remove();
             }
         }
         deleteCircle();
