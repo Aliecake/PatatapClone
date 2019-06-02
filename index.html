@@ -28,7 +28,6 @@
             var pickedColor = colors[Math.floor(Math.random() * (colors.length) + 0)];
             return pickedColor;
         }
-
         var circles = [];
 
         //key down create new random circle
@@ -39,13 +38,12 @@
             var point = maxPoint * randomPoint;
             var color;
             var newCircle = new Path.Circle((point), radius);
-            //if data does not exist, create key data
+            //if color data does not exist, create key data
             if (!keysData[event.key]) {
                 color = newCircle.fillColor = randomColor();
 
                 keysData[event.key] = {
                     color: color,
-                    sound: "playme.mp3"
                 }
                 circles.push(newCircle)
 
@@ -61,6 +59,7 @@
                 circles[ii].scale(.92)
             }
         }
+        //delete circles from array so it doesnt get too large.
         function deleteCircle() {
             for (var jj = 0; jj < circles.length; jj++){
                 circles.shift(circles[jj])
